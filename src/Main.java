@@ -15,9 +15,15 @@ public class Main
                 .withAmount(new BigDecimal(298000))
                 .withMonthsDuration(BigDecimal.valueOf(160));
 
-        RateCalculationService rateCalculationService = new RateCalculationServiceImpl();
 
         PrintingService printingService = new PrintingServiceImpl();
+
+        RateCalculationService rateCalculationService = new RateCalculationServiceImpl(
+                new TimePointServiceImpl(),
+                new AmountsCalculationServiceImpl(),
+                new ResidualCalculationServiceImpl()
+        );
+
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(
                 printingService,
                 rateCalculationService);

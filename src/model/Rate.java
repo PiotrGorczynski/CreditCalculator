@@ -40,4 +40,12 @@ public class Rate
     {
         return mortgageResidiual;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Rate{" +
+                "timePoint=" + timePoint +
+                '}';
+    }
 }
