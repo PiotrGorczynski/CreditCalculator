@@ -23,4 +23,13 @@ public class MortgageResidiual
     {
         return duration;
     }
+
+    @Override
+    public String toString()
+    {
+        return "MortgageResidiual{" +
+                "amount=" + amount +
+                ", duration=" + duration +
+                '}';
+    }
 }

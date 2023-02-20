@@ -45,7 +45,8 @@ public class Rate
     public String toString()
     {
         return "Rate{" +
-                "timePoint=" + timePoint +
+                "rateAmounts=" + rateAmounts +
+                ", mortgageResidiual=" + mortgageResidiual +
                 '}';
     }
 }
