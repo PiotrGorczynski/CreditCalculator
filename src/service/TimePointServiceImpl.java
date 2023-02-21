@@ -29,12 +29,10 @@ public class TimePointServiceImpl implements TimePointService
 
     private BigDecimal calculateYear(final BigDecimal rateNumber)
     {
-        return BigDecimal.ZERO.equals(rateNumber.divide(YEAR)) ? YEAR : rateNumber.remainder(YEAR);
-
+        return rateNumber.divide(YEAR, RoundingMode.HALF_UP).max(BigDecimal.ONE);
     }
 
     private BigDecimal calculateMonth(final BigDecimal rateNumber)
     {
-        return rateNumber.remainder(YEAR);
-    }
+        return BigDecimal.ZERO.equals(rateNumber.remainder(YEAR)) ? YEAR : rateNumber.remainder(YEAR);    }
 }

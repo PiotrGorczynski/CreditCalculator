@@ -1,6 +1,9 @@
 package service;
 
 import model.InputData;
+import model.Rate;
+
+import java.util.List;
 
 public interface PrintingService
 {
@@ -9,7 +12,7 @@ public interface PrintingService
     String YEAR = "YEAR: ";
     String MONTH = "MONTH: ";
     String DATE = "DATE: ";
-    String MONTHS = " MONTHS";
+    String MONTHS = " MONTHS ";
     String RATE = "RATE: ";
     String INTEREST = "INTEREST: ";
     String CAPITAL = "CAPITAL: ";
@@ -23,4 +26,6 @@ public interface PrintingService
     String PERCENT = "% ";
 
     void printInputData(final InputData inputData);
+
+    void printRates(List<Rate> rates);
 }

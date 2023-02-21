@@ -39,7 +39,7 @@ public class RateCalculationServiceImpl implements RateCalculationService
 
         for (BigDecimal index = rateNumber.add(BigDecimal.ONE);
              index.compareTo(inputData.getMonthsDuration()) <= 0;
-             index.add(BigDecimal.ONE))
+             index = index.add(BigDecimal.ONE))
         {
             Rate nextRate = calculateRate(index, inputData, previousRate);
             rates.add(nextRate);
