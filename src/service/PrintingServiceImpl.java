@@ -16,7 +16,7 @@ public class PrintingServiceImpl implements PrintingService
         msg.append(NEW_LINE);
         msg.append(MORTGATE_PERIOD).append(inputData.getMonthsDuration()).append(MONTHS);
         msg.append(NEW_LINE);
-        msg.append(INTEREST).append(inputData.getInterestPercentDisplay()).append(PERCENT);
+        msg.append(INTEREST_).append(inputData.getInterestPercentDisplay()).append(PERCENT);
         msg.append(NEW_LINE);
 
         printMessage(msg);
@@ -31,15 +31,15 @@ public class PrintingServiceImpl implements PrintingService
     @Override
     public void printRates(List<Rate> rates)
     {
-        String format = "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s" +
-                "%s %s";
+        String format = "%11s %3s" +
+                "%11s %4s" +
+                "%11s %2s" +
+                "%11s %2s" +
+                "%11s %4s" +
+                "%11s %4s" +
+                "%11s %4s" +
+                "%11s %4s" +
+                "%11s %4s";
 
         for (Rate rate : rates)
         {
@@ -52,10 +52,17 @@ public class PrintingServiceImpl implements PrintingService
                     INTEREST, rate.getRateAmounts().getInterestAmount(),
                     CAPITAL, rate.getRateAmounts().getCapitalAmount(),
                     LEFT, rate.getMortgageResidiual().getAmount(),
-                    MONTHS, rate.getMortgageResidiual().getDuration()
+                    LEFT_MONTHS, rate.getMortgageResidiual().getDuration()
             );
             printMessage(new StringBuilder(message));
+
+            if(rate.getRateNumber().intValue()%12==0)
+            {
+                System.out.println();
+            }
         }
+
+
 
     }
 }

@@ -1,5 +1,6 @@
 import model.InputData;
 import model.Rate;
+import model.RateType;
 import service.*;
 
 import java.math.BigDecimal;
@@ -12,8 +13,8 @@ public class Main
     public static void main(String[] args)
     {
         InputData inputData = new InputData()
-                .withAmount(new BigDecimal(298000))
-                .withMonthsDuration(BigDecimal.valueOf(160));
+                .withAmount(new BigDecimal(29800))
+                .withRateType(RateType.CONSTANT);
 
 
         PrintingService printingService = new PrintingServiceImpl();
