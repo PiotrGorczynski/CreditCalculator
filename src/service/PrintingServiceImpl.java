@@ -2,6 +2,7 @@ package service;
 
 import model.InputData;
 import model.Rate;
+import model.Summary;
 
 import java.util.List;
 
@@ -23,18 +24,13 @@ public class PrintingServiceImpl implements PrintingService
 
     }
 
-    private void printMessage(StringBuilder sb)
-    {
-        System.out.println(sb);
-    }
-
     @Override
     public void printRates(List<Rate> rates)
     {
-        String format = "%11s %3s" +
+        String format = "%11s %4s" +
                 "%11s %4s" +
-                "%11s %2s" +
-                "%11s %2s" +
+                "%11s %4s" +
+                "%11s %4s" +
                 "%11s %4s" +
                 "%11s %4s" +
                 "%11s %4s" +
@@ -63,6 +59,21 @@ public class PrintingServiceImpl implements PrintingService
         }
 
 
-
     }
+
+    @Override
+    public void printSummary(Summary summary)
+    {
+        StringBuilder msg = new StringBuilder(NEW_LINE);
+        msg.append(INTEREST_SUM).append(summary.getInterestSum()).append(CURRENCY);
+        msg.append(NEW_LINE);
+
+        printMessage(new StringBuilder(msg.toString()));
+    }
+
+    private void printMessage(StringBuilder sb)
+    {
+        System.out.println(sb);
+    }
+
 }

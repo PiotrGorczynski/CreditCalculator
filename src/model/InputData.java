@@ -3,6 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class InputData
 {
@@ -17,6 +18,20 @@ public class InputData
     private RateType rateType = RateType.CONSTANT;
 
     private BigDecimal bankMarginPercent = new BigDecimal("1.9");
+
+    //first we pay off the rate, then we overpay
+    private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
+            5,BigDecimal.valueOf(10000),
+            6,BigDecimal.valueOf(10000),
+            7,BigDecimal.valueOf(10000),
+            8,BigDecimal.valueOf(10000)
+    );
+
+    private String overpaymentReduceWay = Overpayment.REDUCE_PERIOD;
+
+    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
+    private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
+
 
     public static final BigDecimal PERCENT = BigDecimal.valueOf(100);
 

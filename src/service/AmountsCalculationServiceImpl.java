@@ -17,17 +17,14 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService
     {
         switch (inputData.getRateType())
         {
-            case CONSTANT -> {
+            case CONSTANT:
                 return calculateConstantRate(inputData);
-            }
 
-            case DECREASING -> {
+            case DECREASING:
                 return calculateDecreasingRate(inputData);
-            }
-            default ->{
-                throw new RuntimeException("CASE NOT HANDLED");
-            }
 
+            default:
+                throw new RuntimeException("CASE NOT HANDLED");
         }
     }
     
@@ -36,17 +33,14 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService
     {
         switch (inputData.getRateType())
         {
-            case CONSTANT -> {
+            case CONSTANT:
                 return calculateConstantRate(inputData, previousRate);
-            }
 
-            case DECREASING -> {
+            case DECREASING:
                 return calculateDecreasingRate(inputData, previousRate);
-            }
-            default ->{
-                throw new RuntimeException("CASE NOT HANDLED");
-            }
 
+            default:
+                throw new RuntimeException("CASE NOT HANDLED");
         }
 
     }
@@ -123,6 +117,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService
                 .multiply(q.subtract(BigDecimal.ONE))
                 .divide(q.pow(monthsDuration.intValue()).subtract(BigDecimal.ONE),2,RoundingMode.HALF_UP);
     }
+
 
     private BigDecimal calculateConstantCapitalAmount(BigDecimal rateAmount, BigDecimal interestAmount)
     {

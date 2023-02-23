@@ -3,6 +3,8 @@ package service;
 import model.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,17 +35,17 @@ public class RateCalculationServiceImpl implements RateCalculationService
         BigDecimal rateNumber = BigDecimal.ONE;
 
         Rate firstRate = calculateRate(rateNumber,inputData);
+        Rate previousRate = firstRate;
         rates.add(firstRate);
 
-        Rate previousRate = firstRate;
 
         for (BigDecimal index = rateNumber.add(BigDecimal.ONE);
              index.compareTo(inputData.getMonthsDuration()) <= 0;
              index = index.add(BigDecimal.ONE))
         {
             Rate nextRate = calculateRate(index, inputData, previousRate);
-            rates.add(nextRate);
             previousRate = nextRate;
+            rates.add(nextRate);
         }
 
         return rates;

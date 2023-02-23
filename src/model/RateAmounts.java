@@ -11,13 +11,19 @@ public class RateAmounts
 
     private final BigDecimal capitalAmount;
 
-    public RateAmounts(BigDecimal rateAmount, BigDecimal interestAmount, BigDecimal capitalAmount)
+    private final Overpayment overpayment;
+
+    public RateAmounts(
+            BigDecimal rateAmount,
+            BigDecimal interestAmount,
+            BigDecimal capitalAmount,
+            Overpayment overpayment)
     {
         this.rateAmount = rateAmount;
         this.interestAmount = interestAmount;
         this.capitalAmount = capitalAmount;
+        this.overpayment = overpayment;
     }
-
 
     public BigDecimal getRateAmount()
     {
@@ -32,6 +38,11 @@ public class RateAmounts
     public BigDecimal getCapitalAmount()
     {
         return capitalAmount.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public Overpayment getOverpayment()
+    {
+        return overpayment;
     }
 
     @Override
