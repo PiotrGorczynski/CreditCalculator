@@ -1,6 +1,7 @@
 package service;
 
 import model.InputData;
+import model.Overpayment;
 import model.Rate;
 import model.RateAmounts;
 
@@ -13,7 +14,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService
     private static final BigDecimal YEAR = BigDecimal.valueOf(12);
 
     @Override
-    public RateAmounts calculate(InputData inputData)
+    public RateAmounts calculate(InputData inputData, Overpayment overpayment)
     {
         switch (inputData.getRateType())
         {
@@ -29,7 +30,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService
     }
     
     @Override
-    public RateAmounts calculate(InputData inputData, Rate previousRate)
+    public RateAmounts calculate(InputData inputData,Overpayment overpayment, Rate previousRate)
     {
         switch (inputData.getRateType())
         {

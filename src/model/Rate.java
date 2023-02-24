@@ -12,14 +12,16 @@ public class Rate
 
     private final MortgageResidiual mortgageResidiual;
 
-    public Rate(BigDecimal rateNumber, TimePoint timePoint, RateAmounts rateAmounts, MortgageResidiual mortgageResidiual)
+    private final MortgageReference mortgageReference;
+
+    public Rate(BigDecimal rateNumber, TimePoint timePoint, RateAmounts rateAmounts, MortgageResidiual mortgageResidiual, MortgageReference mortgageReference)
     {
         this.rateNumber = rateNumber;
         this.timePoint = timePoint;
         this.rateAmounts = rateAmounts;
         this.mortgageResidiual = mortgageResidiual;
+        this.mortgageReference = mortgageReference;
     }
-
 
     public BigDecimal getRateNumber()
     {
@@ -41,12 +43,8 @@ public class Rate
         return mortgageResidiual;
     }
 
-    @Override
-    public String toString()
+    public MortgageReference getMortgageReference()
     {
-        return "Rate{" +
-                "rateAmounts=" + rateAmounts +
-                ", mortgageResidiual=" + mortgageResidiual +
-                '}';
+        return mortgageReference;
     }
 }
