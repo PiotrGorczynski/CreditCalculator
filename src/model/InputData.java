@@ -32,6 +32,26 @@ public class InputData
     private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
     private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
 
+    public InputData withOverpaymentSchema(Map<Integer, BigDecimal> overpaymentSchema){
+        this.overpaymentSchema = overpaymentSchema;
+        return this;
+    }
+
+
+    public InputData withOverpaymentReduceWay(String overpaymentReduceWay){
+        this.overpaymentReduceWay = overpaymentReduceWay;
+        return this;
+    }
+
+    public InputData withOverpaymentProvisionPercent(BigDecimal overpaymentProvisionPercent){
+        this.overpaymentProvisionPercent = overpaymentProvisionPercent;
+        return this;
+    }
+    public InputData withOverpaymentProvisionMonths(BigDecimal overpaymentProvisionMonths){
+        this.overpaymentProvisionMonths = overpaymentProvisionMonths;
+        return this;
+    }
+
 
     public static final BigDecimal PERCENT = BigDecimal.valueOf(100);
 
@@ -83,11 +103,30 @@ public class InputData
     }
 
     public BigDecimal getInterestPercent(){
-        return wiborPercent.add(bankMarginPercent).divide(PERCENT,10, RoundingMode.HALF_UP);
+        return wiborPercent.add(bankMarginPercent).divide(PERCENT,4, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getInterestPercentDisplay(){
         return wiborPercent.add(bankMarginPercent).setScale(2,RoundingMode.HALF_UP);
     }
 
+    public Map<Integer, BigDecimal> getOverpaymentSchema()
+    {
+        return overpaymentSchema;
+    }
+
+    public String getOverpaymentReduceWay()
+    {
+        return overpaymentReduceWay;
+    }
+
+    public BigDecimal getOverpaymentProvisionPercent()
+    {
+        return overpaymentProvisionPercent.divide(PERCENT,4, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getOverpaymentProvisionMonths()
+    {
+        return overpaymentProvisionMonths;
+    }
 }
