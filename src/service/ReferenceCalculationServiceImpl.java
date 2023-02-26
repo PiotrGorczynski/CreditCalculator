@@ -9,14 +9,8 @@ import java.util.List;
 public class ReferenceCalculationServiceImpl implements ReferenceCalculationService
 {
     @Override
-    public MortgageReference calculate()
+    public MortgageReference calculate(InputData inputData)
     {
-        return null;
-    }
-
-    @Override
-    public MortgageReference calculate(Rate previousRate)
-    {
-        return null;
+        return new MortgageReference(inputData.getAmount(), inputData.getMonthsDuration());
     }
 }
