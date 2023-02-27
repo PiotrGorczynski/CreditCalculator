@@ -1,12 +1,12 @@
 package service;
 
 import model.InputData;
-import model.MortgageResidiual;
+import model.MortgageResidual;
 import model.Rate;
 import model.RateAmounts;
 
 public interface ResidualCalculationService
 {
-    MortgageResidiual calculate(RateAmounts rateAmounts, InputData inputData);
-    MortgageResidiual calculate(RateAmounts rateAmounts, Rate inputData);
+    MortgageResidual calculate(RateAmounts rateAmounts, InputData inputData);
+    MortgageResidual calculate(RateAmounts rateAmounts, Rate inputData);
 }

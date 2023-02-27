@@ -14,7 +14,7 @@ public class OverpaymentCalculationServiceImpl implements OverpaymentCalculation
     {
         BigDecimal overpaymentAmount = calculateAmount(rateNumber, inputData.getOverpaymentSchema()).
                 orElse(BigDecimal.ZERO);
-        BigDecimal overpaymentProvision = calculateProvision(rateNumber, overpaymentAmount, inputData.getOverpaymentSchema());
+        BigDecimal overpaymentProvision = calculateProvision(rateNumber, overpaymentAmount, inputData);
 
         return new Overpayment(overpaymentAmount, overpaymentProvision);
     }

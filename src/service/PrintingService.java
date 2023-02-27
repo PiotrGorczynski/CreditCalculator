@@ -4,11 +4,17 @@ import model.InputData;
 import model.Rate;
 import model.Summary;
 
+import javax.print.DocFlavor;
 import java.util.List;
 
 public interface PrintingService
 {
     String INTEREST_SUM = "INTEREST SUM: ";
+    String OVERPAYMENT_PROVISION = "OVERPAYMENT COMMISSION: ";
+    String LOSTS_SUM = "SUM OF LOSSES: ";
+    String OVERPAYMENT_REDUCE_RATE = "OVERPAYMENT REDUCE RATE: ";
+    String OVERPAYMENT_REDUCE_PERIOD = "OVERPAYMENT REDUCE PERIOD";
+    String OVERPAYMENT_FREQUENCY = "OVERPAYMENT SCHEMA: ";
     String RATE_NUMBER = " RATE NR:";
     String YEAR = " YEAR:";
     String MONTH = " MONTH:";

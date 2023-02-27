@@ -1,10 +1,8 @@
 import model.InputData;
-import model.Rate;
 import model.RateType;
 import service.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Main
 {
@@ -22,10 +20,12 @@ public class Main
 
         RateCalculationService rateCalculationService = new RateCalculationServiceImpl(
                 new TimePointServiceImpl(),
-                new AmountsCalculationServiceImpl(),
+                new AmountsCalculationServiceImpl(new ConstantAmountsCalculationServiceImpl(),
+                        new DecreasingAmountsCalculationServiceImpl()
+                ),
                 new OverpaymentCalculationServiceImpl(),
                 new ResidualCalculationServiceImpl(),
-                new ReferenceCalculationServiceImpl();
+                new ReferenceCalculationServiceImpl()
         );
 
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(

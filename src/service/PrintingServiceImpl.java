@@ -1,10 +1,12 @@
 package service;
 
 import model.InputData;
+import model.Overpayment;
 import model.Rate;
 import model.Summary;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PrintingServiceImpl implements PrintingService
 {
@@ -20,8 +22,31 @@ public class PrintingServiceImpl implements PrintingService
         msg.append(INTEREST_).append(inputData.getInterestPercentDisplay()).append(PERCENT);
         msg.append(NEW_LINE);
 
+        Optional.of(inputData.getOverpaymentSchema())
+                        .filter(schema -> schema.size() > 0)
+                        .ifPresent(schema -> logOverpayment(msg, inputData));
+
         printMessage(msg);
 
+    }
+
+    private void logOverpayment(StringBuilder msg, InputData inputData)
+    {
+        switch (inputData.getOverpaymentReduceWay())
+        {
+            case Overpayment.REDUCE_PERIOD:
+                msg.append(OVERPAYMENT_REDUCE_PERIOD);
+                break;
+            case Overpayment.REDUCE_RATE:
+                msg.append(OVERPAYMENT_REDUCE_RATE);
+                break;
+            default:
+                throw new MortgageException();
+        }
+
+        msg.append(NEW_LINE);
+        msg.append(OVERPAYMENT_FREQUENCY).append(inputData.getOverpaymentSchema());
+        msg.append(NEW_LINE);
     }
 
     @Override
@@ -47,8 +72,8 @@ public class PrintingServiceImpl implements PrintingService
                     RATE, rate.getRateAmounts().getRateAmount(),
                     INTEREST, rate.getRateAmounts().getInterestAmount(),
                     CAPITAL, rate.getRateAmounts().getCapitalAmount(),
-                    LEFT, rate.getMortgageResidiual().getAmount(),
-                    LEFT_MONTHS, rate.getMortgageResidiual().getDuration()
+                    LEFT, rate.getMortgageResidual().getResidualAmount(),
+                    LEFT_MONTHS, rate.getMortgageResidual().getResidualDuration()
             );
             printMessage(new StringBuilder(message));
 
@@ -66,6 +91,10 @@ public class PrintingServiceImpl implements PrintingService
     {
         StringBuilder msg = new StringBuilder(NEW_LINE);
         msg.append(INTEREST_SUM).append(summary.getInterestSum()).append(CURRENCY);
+        msg.append(NEW_LINE);
+        msg.append(OVERPAYMENT_PROVISION).append(summary.getOverpaymentProvisions()).append(CURRENCY);
+        msg.append(NEW_LINE);
+        msg.append(LOSTS_SUM).append(summary.getTotalLosts()).append(CURRENCY);
         msg.append(NEW_LINE);
 
         printMessage(new StringBuilder(msg.toString()));
