@@ -16,17 +16,18 @@ public interface PrintingService
     String OVERPAYMENT_REDUCE_PERIOD = "OVERPAYMENT REDUCE PERIOD";
     String OVERPAYMENT_FREQUENCY = "OVERPAYMENT SCHEMA: ";
     String RATE_NUMBER = " RATE NR:";
-    String YEAR = " YEAR:";
-    String MONTH = " MONTH:";
-    String DATE = " DATE:";
+    String YEAR = "  YEAR:";
+    String MONTH = "  MONTH:";
+    String DATE = "  DATE: ";
     String LEFT_MONTHS = " MONTHS:";
     String MONTHS = " MONTHS";
     String RATE = " RATE:";
     String CAPITAL = " CAPITAL:";
+    String OVERPAYMENT = " OVERPAYMENT: ";
     String LEFT = " LEFT:";
     String MORTGAGE_AMOUNT = "MORTGAGE AMOUNT: ";
     String MORTGATE_PERIOD = "MORTGAGE PERIOD: ";
-    String INTEREST_ = "INTEREST: ";
+    String INTEREST_ = " INTEREST: ";
     String INTEREST = " INTEREST:";
 
 

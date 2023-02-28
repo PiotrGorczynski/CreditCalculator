@@ -52,15 +52,17 @@ public class PrintingServiceImpl implements PrintingService
     @Override
     public void printRates(List<Rate> rates)
     {
-        String format = "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s" +
-                "%11s %4s";
+        String format =
+                "%-4s %3s " +
+                        "%-4s %3s " +
+                        "%-7s %2s " +
+                        "%-7s %3s " +
+                        "%-4s %9s " +
+                        "%-7s %8s " +
+                        "%-7s %8s " +
+                        "%-7s %8s " +
+                        "%-8s %10s " +
+                        "%-8s %5s ";
 
         for (Rate rate : rates)
         {
@@ -72,6 +74,7 @@ public class PrintingServiceImpl implements PrintingService
                     RATE, rate.getRateAmounts().getRateAmount(),
                     INTEREST, rate.getRateAmounts().getInterestAmount(),
                     CAPITAL, rate.getRateAmounts().getCapitalAmount(),
+                    OVERPAYMENT, rate.getRateAmounts().getOverpayment().getAmount(),
                     LEFT, rate.getMortgageResidual().getResidualAmount(),
                     LEFT_MONTHS, rate.getMortgageResidual().getResidualDuration()
             );

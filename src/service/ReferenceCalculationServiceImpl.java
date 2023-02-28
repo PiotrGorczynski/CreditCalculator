@@ -1,10 +1,8 @@
 package service;
 
-import model.InputData;
-import model.MortgageReference;
-import model.Rate;
-import model.RateAmounts;
+import model.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ReferenceCalculationServiceImpl implements ReferenceCalculationService
@@ -12,12 +10,43 @@ public class ReferenceCalculationServiceImpl implements ReferenceCalculationServ
     @Override
     public MortgageReference calculate(RateAmounts rateAmounts, InputData inputData)
     {
-        return null;
+        if (BigDecimal.ZERO.equals(inputData.getAmount())) {
+            return new MortgageReference(BigDecimal.ZERO, BigDecimal.ZERO);
+        }
+        return new MortgageReference(inputData.getAmount(), inputData.getMonthsDuration());
     }
 
     @Override
     public MortgageReference calculate(RateAmounts rateAmounts, InputData inputData, Rate previousRate)
     {
-        return null;
+        if (BigDecimal.ZERO.equals(previousRate.getMortgageResidual().getResidualAmount())) {
+            return new MortgageReference(BigDecimal.ZERO, BigDecimal.ZERO);
+        }
+
+        switch (inputData.getOverpaymentReduceWay()) {
+            case Overpayment.REDUCE_RATE:
+                return reduceRateMortgageReference(rateAmounts, previousRate.getMortgageResidual());
+            case Overpayment.REDUCE_PERIOD:
+                return new MortgageReference(inputData.getAmount(), inputData.getMonthsDuration());
+            default:
+                throw new MortgageException();
+        }
+    }
+
+    private MortgageReference reduceRateMortgageReference(RateAmounts rateAmounts, MortgageResidual previousResidual)
+    {
+        if (rateAmounts.getOverpayment().getAmount().compareTo(BigDecimal.ZERO) > 0) {
+            BigDecimal residualAmount = calculateResidualAmount(previousResidual.getResidualAmount(), rateAmounts);
+            return new MortgageReference(residualAmount, previousResidual.getResidualDuration().subtract(BigDecimal.ONE));
+        }
+        return new MortgageReference(previousResidual.getResidualAmount(), previousResidual.getResidualDuration());
+
+    }
+
+    private BigDecimal calculateResidualAmount(final BigDecimal residualAmount, final RateAmounts rateAmounts) {
+        return residualAmount
+                .subtract(rateAmounts.getCapitalAmount())
+                .subtract(rateAmounts.getOverpayment().getAmount())
+                .max(BigDecimal.ZERO);
     }
 }
