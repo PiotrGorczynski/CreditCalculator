@@ -5,6 +5,7 @@ import service.*;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main
 {
@@ -12,18 +13,12 @@ public class Main
 
     public static void main(String[] args)
     {
-        InputData inputData = new InputData()
-                .withAmount(new BigDecimal(298000))
-                .withOverpaymentSchema(Map.of(
-                        4, BigDecimal.valueOf(10000),
-                        8, BigDecimal.valueOf(10000),
-                        15, BigDecimal.valueOf(10000),
-                        28, BigDecimal.valueOf(10000)
+        Scanner scanner = new Scanner(System.in);
 
-                ))
-                .withMonthsDuration(BigDecimal.valueOf(360))
-                .withRateType(RateType.DECREASING)
-                .withOverpaymentReduceWay(Overpayment.REDUCE_RATE);
+        InputData inputData = new InputData()
+                .withAmount(new BigDecimal(150000))
+                .withMonthsDuration(BigDecimal.valueOf(180))
+                .withRateType(RateType.DECREASING);
 
 
         PrintingService printingService = new PrintingServiceImpl();

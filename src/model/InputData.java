@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Scanner;
 
 public class InputData
 {
@@ -18,6 +19,7 @@ public class InputData
     private RateType rateType = RateType.CONSTANT;
 
     private BigDecimal bankMarginPercent = new BigDecimal("1.9");
+
 
     //first we pay off the rate, then we overpay
     private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
