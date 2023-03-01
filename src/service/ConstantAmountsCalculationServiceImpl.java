@@ -4,12 +4,10 @@ import model.InputData;
 import model.Overpayment;
 import model.Rate;
 import model.RateAmounts;
+import utils.CalculationUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import static service.AmountsCalculationService.calculateInterestAmount;
-import static service.AmountsCalculationService.calculateQ;
 
 public class ConstantAmountsCalculationServiceImpl implements ConstantAmountsCalculationService
 {
@@ -20,7 +18,7 @@ public class ConstantAmountsCalculationServiceImpl implements ConstantAmountsCal
 
         BigDecimal residualAmount = inputData.getAmount();
 
-        BigDecimal interestAmount = AmountsCalculationService.calculateInterestAmount(residualAmount, interestPercent);
+        BigDecimal interestAmount = CalculationUtils.calculateInterestAmount(residualAmount, interestPercent);
         BigDecimal rateAmount = calculateConstantRateAmount(q, interestAmount, residualAmount, inputData.getAmount(), inputData.getMonthsDuration());
         BigDecimal capitalAmount = AmountsCalculationService.compareCapitalWithResidual(rateAmount.subtract(interestAmount), residualAmount);
 
@@ -36,7 +34,7 @@ public class ConstantAmountsCalculationServiceImpl implements ConstantAmountsCal
         BigDecimal referenceAmount = previousRate.getMortgageReference().getReferenceAmount();
         BigDecimal referenceDuration = previousRate.getMortgageReference().getReferenceDuration();
 
-        BigDecimal interestAmount = AmountsCalculationService.calculateInterestAmount(residualAmount, interestPercent);
+        BigDecimal interestAmount = CalculationUtils.calculateInterestAmount(residualAmount, interestPercent);
         BigDecimal rateAmount = calculateConstantRateAmount(q, interestAmount, residualAmount, referenceAmount, referenceDuration);
         BigDecimal capitalAmount = AmountsCalculationService.compareCapitalWithResidual(rateAmount.subtract(interestAmount), residualAmount);
 

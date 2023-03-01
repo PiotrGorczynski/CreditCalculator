@@ -1,6 +1,7 @@
 package service;
 
 import model.*;
+import utils.CalculationUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,17 +37,11 @@ public class ReferenceCalculationServiceImpl implements ReferenceCalculationServ
     private MortgageReference reduceRateMortgageReference(RateAmounts rateAmounts, MortgageResidual previousResidual)
     {
         if (rateAmounts.getOverpayment().getAmount().compareTo(BigDecimal.ZERO) > 0) {
-            BigDecimal residualAmount = calculateResidualAmount(previousResidual.getResidualAmount(), rateAmounts);
+            BigDecimal residualAmount = CalculationUtils.calculateResidualAmount(rateAmounts, previousResidual.getResidualAmount());
             return new MortgageReference(residualAmount, previousResidual.getResidualDuration().subtract(BigDecimal.ONE));
         }
         return new MortgageReference(previousResidual.getResidualAmount(), previousResidual.getResidualDuration());
 
     }
 
-    private BigDecimal calculateResidualAmount(final BigDecimal residualAmount, final RateAmounts rateAmounts) {
-        return residualAmount
-                .subtract(rateAmounts.getCapitalAmount())
-                .subtract(rateAmounts.getOverpayment().getAmount())
-                .max(BigDecimal.ZERO);
-    }
 }
